@@ -1,0 +1,15 @@
+@import '../../styles/variables';
+
+.header {
+  background-color: $dark-coffee-color;
+  padding: 2px 0px;
+  color: $grey-white;
+  height: 3rem;
+  .company-name {
+    font-style: italic;
+  }
+  .backet {
+    position: absolute;
+    right: 20px;
+  }
+}

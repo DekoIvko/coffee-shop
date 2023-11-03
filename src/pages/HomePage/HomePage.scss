@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+
+.home-page {
+  .button-back {
+    background: $grey-white;
+    border-radius: $border-radius-medium;
+  }
+  button {
+    max-width: 350px;
+    min-width: 260px;
+    border: none;
+  }
+}
