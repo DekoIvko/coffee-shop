@@ -1,5 +1,8 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import { Coffees } from '../../enums/ECoffees';
+import { RootState } from '../../store/store';
+import { GetCoffeesThunk } from '../../store/coffeesSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import { CoffeeList, CoffeeModal } from '../../components';
 import withModifyCoffees from '../../hooks/withModifyCoffees';
 
@@ -14,6 +17,12 @@ const MenuPage = ({
   onAddOrder,
 }: any) => {
   const navigation = useNavigate();
+  const dispatch = useDispatch<any>();
+  const coffees = useSelector((state: RootState) => state.coffees);
+
+  useEffect(() => {
+    dispatch(GetCoffeesThunk());
+  }, [dispatch]);
 
   return (
     <div className='container-fluid menu-page'>
@@ -24,7 +33,7 @@ const MenuPage = ({
         Back to home page
       </button>
       <div className='coffee-menu'>
-        <CoffeeList coffees={Coffees} onCoffeeClick={onCoffeeClick} />
+        <CoffeeList coffees={coffees?.coffees} onCoffeeClick={onCoffeeClick} />
       </div>
       <CoffeeModal
         show={showModal}

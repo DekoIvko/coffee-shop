@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ICoffee } from '../interfaces/ICoffee';
 import { useDispatch } from 'react-redux';
-import { addCoffee, updateCoffees } from '../store/coffeesSlice';
+import { AddCoffeeThunk, UpdateCoffeeThunk } from '../store/coffeesSlice';
 
 interface IProps {
   onCoffeeClick: any;
@@ -29,7 +29,7 @@ const withModifyCoffees = (
     ) => {
       e.preventDefault();
       dispatch(
-        addCoffee({ ...coffee, id: Math.random().toString(16).slice(2) })
+        AddCoffeeThunk({ ...coffee, id: Math.random().toString(16).slice(2) })
       );
       setShowModal(false);
     };
@@ -39,7 +39,7 @@ const withModifyCoffees = (
       coffee: ICoffee
     ) => {
       e.preventDefault();
-      dispatch(updateCoffees({ ...coffee, id: coffee?.id }));
+      dispatch(UpdateCoffeeThunk({ ...coffee, id: coffee?.id }));
       setShowModal(false);
     };
 

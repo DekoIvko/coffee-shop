@@ -1,15 +1,27 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { STATUS } from '../utils/statuses';
 import { ICoffee } from '../interfaces/ICoffee';
+import {
+  AddCoffeesService,
+  getCoffeesService,
+  getMyCoffeesService,
+  UpdateCoffeesService,
+} from '../services/CoffeesService';
 
-interface ICoffeeSlice {
+export interface ICoffeeSlice {
   coffees: ICoffee[];
+  myCoffees: ICoffee[];
   coffeesStatus: string;
+  addedCoffee: string;
+  errors: string;
 }
 
 const initialState: ICoffeeSlice = {
-  coffees: [],
   coffeesStatus: STATUS.IDLE,
+  coffees: [],
+  myCoffees: [],
+  addedCoffee: '',
+  errors: '',
 };
 
 const coffeesSlice = createSlice({
@@ -31,8 +43,86 @@ const coffeesSlice = createSlice({
       state.coffees = filterCoffees;
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(GetCoffeesThunk.rejected, (state: ICoffeeSlice, action: any) => {
+        state.coffeesStatus = STATUS.FAILED;
+        state.errors = action.error.message;
+      })
+      .addCase(GetCoffeesThunk.pending, (state: ICoffeeSlice, action) => {
+        state.coffeesStatus = STATUS.LOADING;
+      })
+      .addCase(GetCoffeesThunk.fulfilled, (state: ICoffeeSlice, action) => {
+        state.coffeesStatus = STATUS.SUCCEEDED;
+        state.coffees = action.payload;
+      })
+      .addCase(
+        GetMyCoffeesThunk.rejected,
+        (state: ICoffeeSlice, action: any) => {
+          state.coffeesStatus = STATUS.FAILED;
+          state.errors = action.error.message;
+        }
+      )
+      .addCase(GetMyCoffeesThunk.pending, (state: ICoffeeSlice, action) => {
+        state.coffeesStatus = STATUS.LOADING;
+      })
+      .addCase(GetMyCoffeesThunk.fulfilled, (state: ICoffeeSlice, action) => {
+        state.coffeesStatus = STATUS.SUCCEEDED;
+        state.myCoffees = action.payload;
+      })
+      .addCase(AddCoffeeThunk.rejected, (state: ICoffeeSlice, action: any) => {
+        state.coffeesStatus = STATUS.FAILED;
+        state.errors = action.error.message;
+      })
+      .addCase(AddCoffeeThunk.pending, (state: ICoffeeSlice, action) => {
+        state.coffeesStatus = STATUS.LOADING;
+      })
+      .addCase(AddCoffeeThunk.fulfilled, (state: ICoffeeSlice, action) => {
+        state.coffeesStatus = STATUS.SUCCEEDED;
+        state.addedCoffee = action.payload;
+      })
+      .addCase(
+        UpdateCoffeeThunk.rejected,
+        (state: ICoffeeSlice, action: any) => {
+          state.coffeesStatus = STATUS.FAILED;
+          state.errors = action.error.message;
+        }
+      )
+      .addCase(UpdateCoffeeThunk.pending, (state: ICoffeeSlice, action) => {
+        state.coffeesStatus = STATUS.LOADING;
+      })
+      .addCase(UpdateCoffeeThunk.fulfilled, (state: ICoffeeSlice, action) => {
+        state.coffeesStatus = STATUS.SUCCEEDED;
+        state.myCoffees = action.payload;
+      });
+  },
+});
+
+export const GetCoffeesThunk = createAsyncThunk('coffee/get', async () => {
+  const response = await getCoffeesService();
+  return response;
+});
+
+export const AddCoffeeThunk = createAsyncThunk(
+  'coffee/add',
+  async (coffee: any) => {
+    const response = await AddCoffeesService(coffee);
+    return response;
+  }
+);
+
+export const UpdateCoffeeThunk = createAsyncThunk(
+  'coffee/update',
+  async (coffee: any) => {
+    const response = await UpdateCoffeesService(coffee);
+    return response;
+  }
+);
+
+export const GetMyCoffeesThunk = createAsyncThunk('my-coffee/get', async () => {
+  const response = await getMyCoffeesService();
+  return response;
 });
 
 export const { addCoffee, updateCoffees } = coffeesSlice.actions;
-export const getAllCoffees = (state: ICoffeeSlice) => state.coffees;
 export default coffeesSlice.reducer;
