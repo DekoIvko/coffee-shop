@@ -4,11 +4,18 @@ import { ICoffee } from '../../interfaces/ICoffee';
 interface IProps {
   show: boolean;
   coffeeDetails: ICoffee;
+  setCoffeeDetails: Function;
   setShow: any;
-  onAddOrder: any;
+  onClickCoffee: any;
 }
 
-const CoffeeModal = ({ show, coffeeDetails, setShow, onAddOrder }: IProps) => {
+const CoffeeModal = ({
+  show,
+  coffeeDetails,
+  setCoffeeDetails,
+  setShow,
+  onClickCoffee,
+}: IProps) => {
   const handleClose = () => setShow(false);
 
   return (
@@ -34,42 +41,45 @@ const CoffeeModal = ({ show, coffeeDetails, setShow, onAddOrder }: IProps) => {
               <InputGroup.Text>Sugar</InputGroup.Text>
               <InputGroup.Text>0 to 5</InputGroup.Text>
               <Form.Control
+                defaultValue={coffeeDetails?.sugar}
                 type='number'
                 aria-label='sugar amount'
-                // onChange={(e) =>
-                //   setProductsParams((prevObj: IProducts) => ({
-                //     ...prevObj,
-                //     price: parseInt(e.target.value, 10),
-                //   }))
-                // }
+                onChange={(e) =>
+                  setCoffeeDetails((prevObj: ICoffee) => ({
+                    ...prevObj,
+                    sugar: parseInt(e.target.value, 10),
+                  }))
+                }
               />
             </InputGroup>
             <InputGroup className='mb-3' style={{ width: '250px' }}>
               <InputGroup.Text>Cream</InputGroup.Text>
               <InputGroup.Text>0 to 5</InputGroup.Text>
               <Form.Control
+                defaultValue={coffeeDetails?.cream}
                 type='number'
                 aria-label='cream amount'
-                // onChange={(e) =>
-                //   setProductsParams((prevObj: IProducts) => ({
-                //     ...prevObj,
-                //     price: parseInt(e.target.value, 10),
-                //   }))
-                // }
+                onChange={(e) =>
+                  setCoffeeDetails((prevObj: ICoffee) => ({
+                    ...prevObj,
+                    cream: parseInt(e.target.value, 10),
+                  }))
+                }
               />
             </InputGroup>
             <InputGroup className='mb-3' style={{ width: '250px' }}>
               <InputGroup.Text>Milk</InputGroup.Text>
               <InputGroup.Text>0 to 5</InputGroup.Text>
               <Form.Control
+                defaultValue={coffeeDetails?.milk}
                 type='number'
                 aria-label='milk amount'
-                // onChange={(e) =>
-                //   setProductsParams((prevObj: IProducts) => ({
-                //     ...prevObj,
-                //     price: parseInt(e.target.value, 10),
-                //   }))
-                // }
+                onChange={(e) =>
+                  setCoffeeDetails((prevObj: ICoffee) => ({
+                    ...prevObj,
+                    milk: parseInt(e.target.value, 10),
+                  }))
+                }
               />
             </InputGroup>
           </div>
@@ -79,8 +89,11 @@ const CoffeeModal = ({ show, coffeeDetails, setShow, onAddOrder }: IProps) => {
         <Button variant='secondary' onClick={handleClose}>
           Close
         </Button>
-        <Button variant='primary' onClick={(e) => onAddOrder(e)}>
-          Add coffee
+        <Button
+          variant='primary'
+          onClick={(e) => onClickCoffee(e, coffeeDetails)}
+        >
+          Proceed
         </Button>
       </Modal.Footer>
     </Modal>

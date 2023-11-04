@@ -1,0 +1,23 @@
+@import '../../styles/variables';
+
+.coffee-lists {
+  .coffee-card {
+    border: 1px solid grey;
+    color: $grey-white;
+    margin: 10px;
+    max-width: 300px;
+    text-decoration: none;
+    border-radius: $border-radius-base;
+    background: $brown;
+    cursor: pointer;
+    img {
+      max-width: 100px;
+      max-height: 100px;
+    }
+  }
+  .coffee-card:hover {
+    transform: translateY(-5px) scale(1.005) translateZ(0);
+    box-shadow: 0 24px 36px rgba(0, 0, 0, 0.11),
+      0 24px 46px var(--box-shadow-color);
+  }
+}

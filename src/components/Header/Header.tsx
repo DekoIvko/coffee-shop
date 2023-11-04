@@ -1,16 +1,28 @@
-import { NavLink } from 'react-router-dom';
-
+import { useNavigate } from 'react-router';
 import './Header.scss';
 
 const Header = () => {
+  const navigation = useNavigate();
+
+  const onNavigatePages = (page: string) => {
+    navigation(page);
+  };
   return (
     <header className='header'>
       <div className='container-fluid d-flex'>
         <div className='header-context align-self-start'>
-          <h2 className='company-name'>Coffee shop</h2>
+          <button
+            className='text-decoration-none'
+            onClick={() => onNavigatePages('/')}
+          >
+            <h2 className='company-name'>Coffee shop</h2>
+          </button>
         </div>
         <div className='backet align-self-end'>
-          <button className='btn btn-default btn-number'>
+          <button
+            className='btn btn-default btn-number'
+            onClick={() => onNavigatePages('/orders')}
+          >
             <svg
               xmlns='http://www.w3.org/2000/svg'
               width='35'

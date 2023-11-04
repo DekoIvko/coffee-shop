@@ -1,4 +1,4 @@
-import { ErrorFallback, Header } from '../components';
+import { ErrorFallback, Header, Footer } from '../components';
 import { Outlet } from 'react-router';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -14,6 +14,7 @@ const RootLayout = () => {
           <Outlet /> {/* render all pages here */}
         </ErrorBoundary>
       </main>
+      <Footer />
     </div>
   );
 };
