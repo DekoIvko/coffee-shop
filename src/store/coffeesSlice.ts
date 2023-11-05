@@ -123,7 +123,6 @@ const coffeesSlice = createSlice({
         UpdateCoffeeThunk.fulfilled,
         (state: ICoffeeSlice, action: PayloadAction<any>) => {
           state.coffeesStatus = STATUS.SUCCEEDED;
-          state.myCoffees = action.payload;
         }
       )
       .addCase(

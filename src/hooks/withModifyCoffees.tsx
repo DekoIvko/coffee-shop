@@ -34,12 +34,13 @@ const withModifyCoffees = (
       setShowModal(false);
     };
 
-    const onUpdateOrder = (
+    const onUpdateOrder = async (
       e: React.MouseEvent<HTMLButtonElement>,
       coffee: ICoffee
     ) => {
       e.preventDefault();
-      dispatch(UpdateCoffeeThunk({ ...coffee, id: coffee?.id }));
+      await dispatch(UpdateCoffeeThunk({ ...coffee, id: coffee?.id }));
+      window.location.reload();
       setShowModal(false);
     };
 

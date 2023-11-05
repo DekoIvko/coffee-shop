@@ -4,10 +4,6 @@ import coffeeReducer from './coffeesSlice';
 export const store = configureStore({
   reducer: {
     coffees: coffeeReducer,
-    //   category: categoryReducer,
-    //   product: productReducer,
-    //   cart: cartReducer,
-    //   search: searchReducer,
   },
 });
 

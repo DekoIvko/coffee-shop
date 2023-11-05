@@ -35,7 +35,7 @@ const CoffeeList = ({ coffees, onCoffeeClick, onRemoveCoffee }: IProps) => {
                   type='button'
                   className='btn-close position-absolute end-0'
                   aria-label='Close'
-                  onClick={onRemoveCoffee}
+                  onClick={() => onRemoveCoffee(coffee)}
                 ></button>
               )}
             </div>

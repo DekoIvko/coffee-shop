@@ -4,7 +4,8 @@ import { RootState } from '../../store/store';
 import { CoffeeList, CoffeeModal } from '../../components';
 import { useNavigate } from 'react-router';
 import withModifyCoffees from '../../hooks/withModifyCoffees';
-import { GetMyCoffeesThunk } from '../../store/coffeesSlice';
+import { GetMyCoffeesThunk, RemoveCoffeeThunk } from '../../store/coffeesSlice';
+import { ICoffee } from '../../interfaces/ICoffee';
 
 import './OrdersPage.scss';
 
@@ -24,8 +25,17 @@ const OrdersPage = ({
     dispatch(GetMyCoffeesThunk());
   }, [dispatch]);
 
-  const onProceedCoffees = () => {
-    if (window.confirm('Are you sure you want to proceed')) console.log('yeah');
+  const onRemoveCoffee = (coffee: ICoffee) => {
+    if (window.confirm('Are you sure?')) {
+      dispatch(RemoveCoffeeThunk(coffee));
+      window.location.reload();
+    }
+  };
+
+  const onProceedCoffees = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (window.confirm('Are you sure you want to proceed')) {
+      console.log('yeah');
+    }
   };
 
   return (
@@ -41,6 +51,7 @@ const OrdersPage = ({
           <CoffeeList
             coffees={coffees?.myCoffees}
             onCoffeeClick={onCoffeeClick}
+            onRemoveCoffee={onRemoveCoffee}
           />
         ) : (
           <div className='d-flex text-light justify-content-center'>
@@ -51,7 +62,7 @@ const OrdersPage = ({
       {coffees.coffees.length ? (
         <button
           className='btn btn-primary float-end'
-          onClick={onProceedCoffees}
+          onClick={(e) => onProceedCoffees(e)}
         >
           Proceed with you order
         </button>
