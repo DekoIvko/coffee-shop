@@ -44,3 +44,15 @@ export const UpdateCoffeesService = async (coffee: any) => {
     return error;
   }
 };
+
+export const RemoveCoffeesService = async (coffee: any) => {
+  try {
+    const response = await axios.post(
+      `${appConfig.baseApiURL}/coffee/remove-coffee`,
+      coffee
+    );
+    return response.data;
+  } catch (error: any) {
+    return error;
+  }
+};

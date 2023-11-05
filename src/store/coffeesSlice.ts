@@ -5,6 +5,7 @@ import {
   AddCoffeesService,
   getCoffeesService,
   getMyCoffeesService,
+  RemoveCoffeesService,
   UpdateCoffeesService,
 } from '../services/CoffeesService';
 
@@ -124,6 +125,25 @@ const coffeesSlice = createSlice({
           state.coffeesStatus = STATUS.SUCCEEDED;
           state.myCoffees = action.payload;
         }
+      )
+      .addCase(
+        RemoveCoffeeThunk.rejected,
+        (state: ICoffeeSlice, action: PayloadAction<any>) => {
+          state.coffeesStatus = STATUS.FAILED;
+          state.errors = action.payload;
+        }
+      )
+      .addCase(
+        RemoveCoffeeThunk.pending,
+        (state: ICoffeeSlice, action: PayloadAction<any>) => {
+          state.coffeesStatus = STATUS.LOADING;
+        }
+      )
+      .addCase(
+        RemoveCoffeeThunk.fulfilled,
+        (state: ICoffeeSlice, action: PayloadAction<any>) => {
+          state.coffeesStatus = STATUS.SUCCEEDED;
+        }
       );
   },
 });
@@ -153,6 +173,14 @@ export const GetMyCoffeesThunk = createAsyncThunk('my-coffee/get', async () => {
   const response = await getMyCoffeesService();
   return response;
 });
+
+export const RemoveCoffeeThunk = createAsyncThunk(
+  'coffee/remove',
+  async (coffee: any) => {
+    const response = await RemoveCoffeesService(coffee);
+    return response;
+  }
+);
 
 export const { addCoffee, updateCoffees } = coffeesSlice.actions;
 export default coffeesSlice.reducer;

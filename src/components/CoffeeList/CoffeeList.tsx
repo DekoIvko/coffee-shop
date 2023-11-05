@@ -8,13 +8,16 @@ import latte from '../../imgs/latte-coffee.webp';
 import macchiato from '../../imgs/macchiato-coffee.jpg';
 
 import './CoffeeList.scss';
+import { useLocation } from 'react-router';
 
 interface IProps {
   coffees: ICoffee[];
   onCoffeeClick: any;
+  onRemoveCoffee?: any;
 }
 
-const CoffeeList = ({ coffees, onCoffeeClick }: IProps) => {
+const CoffeeList = ({ coffees, onCoffeeClick, onRemoveCoffee }: IProps) => {
+  const location = useLocation();
   return (
     <div className='coffee-lists  row justify-content-center gap-4'>
       {coffees?.map((coffee: ICoffee, index: number) => {
@@ -22,12 +25,21 @@ const CoffeeList = ({ coffees, onCoffeeClick }: IProps) => {
           <div
             key={coffee?.coffeeName + index}
             className='coffee-card d-flex flex-column p-4'
-            onClick={() => onCoffeeClick(coffee)}
           >
-            <div className='coffee-title'>
-              <h4>{coffee?.coffeeName}</h4>
+            <div className='d-flex flex-row position-relative'>
+              <div className='coffee-title'>
+                <h4>{coffee?.coffeeName}</h4>
+              </div>
+              {location?.pathname.includes('orders') && (
+                <button
+                  type='button'
+                  className='btn-close position-absolute end-0'
+                  aria-label='Close'
+                  onClick={onRemoveCoffee}
+                ></button>
+              )}
             </div>
-            <div className='coffee-body'>
+            <div className='coffee-body' onClick={() => onCoffeeClick(coffee)}>
               <div>
                 Description: <span>{coffee?.description}</span>
               </div>
