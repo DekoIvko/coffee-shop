@@ -3,7 +3,7 @@ import { appConfig } from '../appConfig';
 
 export const getCoffeesService = async () => {
   try {
-    const response = await axios.get(`${appConfig.baseApiURL}/coffees`);
+    const response = await axios.get(`${appConfig.baseApiURL}/coffee/coffees`);
     return response.data;
   } catch (error: any) {
     return error;
@@ -13,7 +13,7 @@ export const getCoffeesService = async () => {
 export const AddCoffeesService = async (coffee: any) => {
   try {
     const response = await axios.post(
-      `${appConfig.baseApiURL}/add-coffee`,
+      `${appConfig.baseApiURL}/coffee/add-coffee`,
       coffee
     );
     return response.data;
@@ -24,7 +24,9 @@ export const AddCoffeesService = async (coffee: any) => {
 
 export const getMyCoffeesService = async () => {
   try {
-    const response = await axios.get(`${appConfig.baseApiURL}/my-coffees`);
+    const response = await axios.get(
+      `${appConfig.baseApiURL}/coffee/my-coffees`
+    );
     return response.data;
   } catch (error: any) {
     return error;
@@ -34,7 +36,7 @@ export const getMyCoffeesService = async () => {
 export const UpdateCoffeesService = async (coffee: any) => {
   try {
     const response = await axios.post(
-      `${appConfig.baseApiURL}/update-coffee`,
+      `${appConfig.baseApiURL}/coffee/update-coffee`,
       coffee
     );
     return response.data;

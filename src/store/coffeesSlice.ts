@@ -45,56 +45,86 @@ const coffeesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(GetCoffeesThunk.rejected, (state: ICoffeeSlice, action: any) => {
-        state.coffeesStatus = STATUS.FAILED;
-        state.errors = action.error.message;
-      })
-      .addCase(GetCoffeesThunk.pending, (state: ICoffeeSlice, action) => {
-        state.coffeesStatus = STATUS.LOADING;
-      })
-      .addCase(GetCoffeesThunk.fulfilled, (state: ICoffeeSlice, action) => {
-        state.coffeesStatus = STATUS.SUCCEEDED;
-        state.coffees = action.payload;
-      })
+      .addCase(
+        GetCoffeesThunk.rejected,
+        (state: ICoffeeSlice, action: PayloadAction<any>) => {
+          state.coffeesStatus = STATUS.FAILED;
+          state.errors = action.payload;
+        }
+      )
+      .addCase(
+        GetCoffeesThunk.pending,
+        (state: ICoffeeSlice, action: PayloadAction<any>) => {
+          state.coffeesStatus = STATUS.LOADING;
+        }
+      )
+      .addCase(
+        GetCoffeesThunk.fulfilled,
+        (state: ICoffeeSlice, action: PayloadAction<any>) => {
+          state.coffeesStatus = STATUS.SUCCEEDED;
+          state.coffees = action.payload;
+        }
+      )
       .addCase(
         GetMyCoffeesThunk.rejected,
-        (state: ICoffeeSlice, action: any) => {
+        (state: ICoffeeSlice, action: PayloadAction<any>) => {
           state.coffeesStatus = STATUS.FAILED;
-          state.errors = action.error.message;
+          state.errors = action.payload;
         }
       )
-      .addCase(GetMyCoffeesThunk.pending, (state: ICoffeeSlice, action) => {
-        state.coffeesStatus = STATUS.LOADING;
-      })
-      .addCase(GetMyCoffeesThunk.fulfilled, (state: ICoffeeSlice, action) => {
-        state.coffeesStatus = STATUS.SUCCEEDED;
-        state.myCoffees = action.payload;
-      })
-      .addCase(AddCoffeeThunk.rejected, (state: ICoffeeSlice, action: any) => {
-        state.coffeesStatus = STATUS.FAILED;
-        state.errors = action.error.message;
-      })
-      .addCase(AddCoffeeThunk.pending, (state: ICoffeeSlice, action) => {
-        state.coffeesStatus = STATUS.LOADING;
-      })
-      .addCase(AddCoffeeThunk.fulfilled, (state: ICoffeeSlice, action) => {
-        state.coffeesStatus = STATUS.SUCCEEDED;
-        state.addedCoffee = action.payload;
-      })
+      .addCase(
+        GetMyCoffeesThunk.pending,
+        (state: ICoffeeSlice, action: PayloadAction<any>) => {
+          state.coffeesStatus = STATUS.LOADING;
+        }
+      )
+      .addCase(
+        GetMyCoffeesThunk.fulfilled,
+        (state: ICoffeeSlice, action: PayloadAction<any>) => {
+          state.coffeesStatus = STATUS.SUCCEEDED;
+          state.myCoffees = action.payload;
+        }
+      )
+      .addCase(
+        AddCoffeeThunk.rejected,
+        (state: ICoffeeSlice, action: PayloadAction<any>) => {
+          state.coffeesStatus = STATUS.FAILED;
+          state.errors = action.payload;
+        }
+      )
+      .addCase(
+        AddCoffeeThunk.pending,
+        (state: ICoffeeSlice, action: PayloadAction<any>) => {
+          state.coffeesStatus = STATUS.LOADING;
+        }
+      )
+      .addCase(
+        AddCoffeeThunk.fulfilled,
+        (state: ICoffeeSlice, action: PayloadAction<any>) => {
+          state.coffeesStatus = STATUS.SUCCEEDED;
+          state.addedCoffee = action.payload;
+        }
+      )
       .addCase(
         UpdateCoffeeThunk.rejected,
-        (state: ICoffeeSlice, action: any) => {
+        (state: ICoffeeSlice, action: PayloadAction<any>) => {
           state.coffeesStatus = STATUS.FAILED;
-          state.errors = action.error.message;
+          state.errors = action.payload;
         }
       )
-      .addCase(UpdateCoffeeThunk.pending, (state: ICoffeeSlice, action) => {
-        state.coffeesStatus = STATUS.LOADING;
-      })
-      .addCase(UpdateCoffeeThunk.fulfilled, (state: ICoffeeSlice, action) => {
-        state.coffeesStatus = STATUS.SUCCEEDED;
-        state.myCoffees = action.payload;
-      });
+      .addCase(
+        UpdateCoffeeThunk.pending,
+        (state: ICoffeeSlice, action: PayloadAction<any>) => {
+          state.coffeesStatus = STATUS.LOADING;
+        }
+      )
+      .addCase(
+        UpdateCoffeeThunk.fulfilled,
+        (state: ICoffeeSlice, action: PayloadAction<any>) => {
+          state.coffeesStatus = STATUS.SUCCEEDED;
+          state.myCoffees = action.payload;
+        }
+      );
   },
 });
 
