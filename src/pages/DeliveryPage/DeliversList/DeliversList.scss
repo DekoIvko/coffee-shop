@@ -1,0 +1,13 @@
+@import "../../../styles/variables";
+
+.deliver-lists {
+  .deliver-card {
+    border: 1px solid grey;
+    color: $grey-white;
+    margin: 10px;
+    max-width: 300px;
+    text-decoration: none;
+    border-radius: $border-radius-base;
+    background: $brown;
+  }
+}

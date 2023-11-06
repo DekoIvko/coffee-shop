@@ -3,6 +3,7 @@ export interface ICoffee {
   coffeeName: string;
   coffeeType: string;
   description: string;
+  price: number;
   sugar?: number;
   milk?: number;
   cream?: number;

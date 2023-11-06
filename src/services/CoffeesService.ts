@@ -1,5 +1,5 @@
-import axios from './axios';
-import { appConfig } from '../appConfig';
+import axios from "./axios";
+import { appConfig } from "../appConfig";
 
 export const getCoffeesService = async () => {
   try {
@@ -12,10 +12,7 @@ export const getCoffeesService = async () => {
 
 export const AddCoffeesService = async (coffee: any) => {
   try {
-    const response = await axios.post(
-      `${appConfig.baseApiURL}/coffee/add-coffee`,
-      coffee
-    );
+    const response = await axios.post(`${appConfig.baseApiURL}/coffee/add-coffee`, coffee);
     return response.data;
   } catch (error: any) {
     return error;
@@ -24,9 +21,7 @@ export const AddCoffeesService = async (coffee: any) => {
 
 export const getMyCoffeesService = async () => {
   try {
-    const response = await axios.get(
-      `${appConfig.baseApiURL}/coffee/my-coffees`
-    );
+    const response = await axios.get(`${appConfig.baseApiURL}/coffee/my-coffees`);
     return response.data;
   } catch (error: any) {
     return error;
@@ -35,10 +30,7 @@ export const getMyCoffeesService = async () => {
 
 export const UpdateCoffeesService = async (coffee: any) => {
   try {
-    const response = await axios.post(
-      `${appConfig.baseApiURL}/coffee/update-coffee`,
-      coffee
-    );
+    const response = await axios.post(`${appConfig.baseApiURL}/coffee/update-coffee`, coffee);
     return response.data;
   } catch (error: any) {
     return error;
@@ -47,10 +39,16 @@ export const UpdateCoffeesService = async (coffee: any) => {
 
 export const RemoveCoffeesService = async (coffee: any) => {
   try {
-    const response = await axios.post(
-      `${appConfig.baseApiURL}/coffee/remove-coffee`,
-      coffee
-    );
+    const response = await axios.post(`${appConfig.baseApiURL}/coffee/remove-coffee`, coffee);
+    return response.data;
+  } catch (error: any) {
+    return error;
+  }
+};
+
+export const RemoveAllMyCoffeesService = async (coffees: any) => {
+  try {
+    const response = await axios.post(`${appConfig.baseApiURL}/coffee/remove-all-myCoffees`, coffees);
     return response.data;
   } catch (error: any) {
     return error;

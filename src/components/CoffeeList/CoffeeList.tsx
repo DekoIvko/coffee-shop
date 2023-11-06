@@ -1,14 +1,14 @@
-import { ICoffee } from '../../interfaces/ICoffee';
+import { ICoffee } from "../../interfaces/ICoffee";
+import { useLocation } from "react-router";
 
-import americano from '../../imgs/americano-coffee2.webp';
-import cappuccino from '../../imgs/cappuccino-coffee.jpg';
-import domashno from '../../imgs/domahsno-coffee.jpg';
-import espresso from '../../imgs/esspreso-coffee.jpg';
-import latte from '../../imgs/latte-coffee.webp';
-import macchiato from '../../imgs/macchiato-coffee.jpg';
+import americano from "../../imgs/americano-coffee2.webp";
+import cappuccino from "../../imgs/cappuccino-coffee.jpg";
+import domashno from "../../imgs/domahsno-coffee.jpg";
+import espresso from "../../imgs/esspreso-coffee.jpg";
+import latte from "../../imgs/latte-coffee.webp";
+import macchiato from "../../imgs/macchiato-coffee.jpg";
 
-import './CoffeeList.scss';
-import { useLocation } from 'react-router';
+import "./CoffeeList.scss";
 
 interface IProps {
   coffees: ICoffee[];
@@ -22,15 +22,12 @@ const CoffeeList = ({ coffees, onCoffeeClick, onRemoveCoffee }: IProps) => {
     <div className='coffee-lists  row justify-content-center gap-4'>
       {coffees?.map((coffee: ICoffee, index: number) => {
         return (
-          <div
-            key={coffee?.coffeeName + index}
-            className='coffee-card d-flex flex-column p-4'
-          >
+          <div key={coffee?.coffeeName + index} className='coffee-card d-flex flex-column p-4'>
             <div className='d-flex flex-row position-relative'>
               <div className='coffee-title'>
                 <h4>{coffee?.coffeeName}</h4>
               </div>
-              {location?.pathname.includes('orders') && (
+              {location?.pathname.includes("orders") && (
                 <button
                   type='button'
                   className='btn-close position-absolute end-0'
@@ -43,22 +40,27 @@ const CoffeeList = ({ coffees, onCoffeeClick, onRemoveCoffee }: IProps) => {
               <div>
                 Description: <span>{coffee?.description}</span>
               </div>
+            </div>
+            <div className='d-flex flex-row position-relative'>
               <img
                 src={
-                  coffee?.coffeeType === 'domashno'
+                  coffee?.coffeeType === "domashno"
                     ? domashno
-                    : coffee?.coffeeType === 'americano'
+                    : coffee?.coffeeType === "americano"
                     ? americano
-                    : coffee?.coffeeType === 'cappuccino'
+                    : coffee?.coffeeType === "cappuccino"
                     ? cappuccino
-                    : coffee?.coffeeType === 'espress'
+                    : coffee?.coffeeType === "espress"
                     ? espresso
-                    : coffee?.coffeeType === 'macchiato'
+                    : coffee?.coffeeType === "macchiato"
                     ? macchiato
                     : latte
                 }
                 alt='coffee'
               />
+              <div className='position-absolute end-0'>
+                Price: <span>{coffee?.price}$</span>
+              </div>
             </div>
           </div>
         );
