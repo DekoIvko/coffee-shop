@@ -4,11 +4,11 @@ import { RootState } from "../../store/store";
 import { CoffeeList, CoffeeModal } from "../../components";
 import { useNavigate } from "react-router";
 import withModifyCoffees from "../../hooks/withModifyCoffees";
-import { GetMyCoffeesThunk, RemoveAllMyCoffeeThunk, RemoveCoffeeThunk } from "../../store/coffeesSlice";
+import { GetMyCoffeesThunk, RemoveCoffeeThunk } from "../../store/coffeesSlice";
 import { ICoffee } from "../../interfaces/ICoffee";
+import { AddDeliverThunk } from "../../store/deliversSlice";
 
 import "./OrdersPage.scss";
-import { AddDeliverThunk } from "../../store/deliversSlice";
 
 const OrdersPage = ({ onCoffeeClick, coffeeDetails, setCoffeeDetails, showModal, setShowModal, onUpdateOrder }: any) => {
   const dispatch = useDispatch<any>();
@@ -38,12 +38,14 @@ const OrdersPage = ({ onCoffeeClick, coffeeDetails, setCoffeeDetails, showModal,
       if (person === null || person === "") {
         alert("Please write you name");
       } else {
-        await dispatch(AddDeliverThunk({ id: Math.random().toString(16).slice(2), name: person, location: "coffee shop", totalPrice }));
-        await dispatch(RemoveAllMyCoffeeThunk(allMyCoffees));
-        alert("You order is successfully completed, please check time and location delivery");
+        await dispatch(
+          AddDeliverThunk({
+            deliver: { id: Math.random().toString(16).slice(2), name: person, location: "coffee shop", totalPrice },
+            myCoffees: allMyCoffees,
+          })
+        );
       }
     }
-    window.location.reload();
   };
 
   return (

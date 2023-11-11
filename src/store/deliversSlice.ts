@@ -50,8 +50,12 @@ export const GetDeliversThunk = createAsyncThunk("deliver/get", async () => {
   return response;
 });
 
-export const AddDeliverThunk = createAsyncThunk("deliver/add", async (deliver: IDelivers) => {
+export const AddDeliverThunk = createAsyncThunk("deliver/add", async (deliver: any) => {
   const response = await createDeliverService(deliver);
+  if (response) {
+    alert("You order is successfully completed, please check time and location delivery");
+    window.location.reload();
+  }
   return response;
 });
 
