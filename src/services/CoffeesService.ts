@@ -45,12 +45,3 @@ export const RemoveCoffeesService = async (coffee: any) => {
     return error;
   }
 };
-
-export const RemoveAllMyCoffeesService = async (coffees: any) => {
-  try {
-    const response = await axios.post(`${appConfig.baseApiURL}/coffee/remove-all-myCoffees`, coffees);
-    return response.data;
-  } catch (error: any) {
-    return error;
-  }
-};

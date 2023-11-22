@@ -2,16 +2,16 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { RootState } from "../../store/store";
 import { GetCoffeesThunk } from "../../store/coffeesSlice";
-import { useDispatch, useSelector } from "react-redux";
 import { CoffeeList, CoffeeModal } from "../../components";
 import withModifyCoffees from "../../hooks/withModifyCoffees";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 import "./MenuPage.scss";
 
 const MenuPage = ({ onCoffeeClick, coffeeDetails, setCoffeeDetails, showModal, setShowModal, onAddOrder }: any) => {
   const navigation = useNavigate();
-  const dispatch = useDispatch<any>();
-  const coffees = useSelector((state: RootState) => state.coffees);
+  const dispatch = useAppDispatch();
+  const coffees = useAppSelector((state: RootState) => state.coffees);
 
   useEffect(() => {
     dispatch(GetCoffeesThunk());

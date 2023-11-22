@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { GetDeliversThunk } from "../../store/deliversSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { RootState } from "../../store/store";
 import DeliversList from "./DeliversList/DeliversList";
 
 const DeliveryPage = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch = useAppDispatch();
   const navigation = useNavigate();
-  const delivers = useSelector((state: RootState) => state.delivers);
+  const delivers = useAppSelector((state: RootState) => state.delivers);
 
   useEffect(() => {
     dispatch(GetDeliversThunk());

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { CoffeeList, CoffeeModal } from "../../components";
 import { useNavigate } from "react-router";
 import withModifyCoffees from "../../hooks/withModifyCoffees";
@@ -11,9 +11,9 @@ import { AddDeliverThunk } from "../../store/deliversSlice";
 import "./OrdersPage.scss";
 
 const OrdersPage = ({ onCoffeeClick, coffeeDetails, setCoffeeDetails, showModal, setShowModal, onUpdateOrder }: any) => {
-  const dispatch = useDispatch<any>();
+  const dispatch = useAppDispatch();
   const navigation = useNavigate();
-  const coffees = useSelector((state: RootState) => state.coffees);
+  const coffees = useAppSelector((state: RootState) => state.coffees);
 
   useEffect(() => {
     dispatch(GetMyCoffeesThunk());

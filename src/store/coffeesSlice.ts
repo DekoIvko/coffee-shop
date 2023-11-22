@@ -1,14 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { STATUS } from "../utils/statuses";
 import { ICoffee } from "../interfaces/ICoffee";
-import {
-  AddCoffeesService,
-  getCoffeesService,
-  getMyCoffeesService,
-  RemoveAllMyCoffeesService,
-  RemoveCoffeesService,
-  UpdateCoffeesService,
-} from "../services/CoffeesService";
+import { AddCoffeesService, getCoffeesService, getMyCoffeesService, RemoveCoffeesService, UpdateCoffeesService } from "../services/CoffeesService";
 
 export interface ICoffeeSlice {
   coffees: ICoffee[];
@@ -97,16 +90,6 @@ const coffeesSlice = createSlice({
       })
       .addCase(RemoveCoffeeThunk.fulfilled, (state: ICoffeeSlice, action: PayloadAction<any>) => {
         state.coffeesStatus = STATUS.SUCCEEDED;
-      })
-      .addCase(RemoveAllMyCoffeeThunk.rejected, (state: ICoffeeSlice, action: PayloadAction<any>) => {
-        state.coffeesStatus = STATUS.FAILED;
-        state.errors = action.payload;
-      })
-      .addCase(RemoveAllMyCoffeeThunk.pending, (state: ICoffeeSlice, action: PayloadAction<any>) => {
-        state.coffeesStatus = STATUS.LOADING;
-      })
-      .addCase(RemoveAllMyCoffeeThunk.fulfilled, (state: ICoffeeSlice, action: PayloadAction<any>) => {
-        state.coffeesStatus = STATUS.SUCCEEDED;
       });
   },
 });
@@ -133,11 +116,6 @@ export const GetMyCoffeesThunk = createAsyncThunk("my-coffee/get", async () => {
 
 export const RemoveCoffeeThunk = createAsyncThunk("coffee/remove", async (coffee: any) => {
   const response = await RemoveCoffeesService(coffee);
-  return response;
-});
-
-export const RemoveAllMyCoffeeThunk = createAsyncThunk("coffee/remove-myCoffees", async (myCoffeesIds: any) => {
-  const response = await RemoveAllMyCoffeesService(myCoffeesIds);
   return response;
 });
 
