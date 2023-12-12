@@ -1,11 +1,9 @@
-import Axios from 'axios';
-import { appConfig } from '../appConfig';
+import Axios from "axios";
+import { appConfig } from "../appConfig";
 
 const axios = Axios.create({
   baseURL: appConfig.baseApiURL,
 });
-
-const CancelToken = Axios.CancelToken.source(); // let it for now
 
 axios.interceptors.response.use(
   function (response) {
@@ -21,11 +19,9 @@ axios.interceptors.response.use(
   }
 );
 
-axios.defaults.headers['Content-Type'] = 'application/json';
-axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
-axios.defaults.headers['Access-Control-Allow-Headers'] =
-  'Origin, X-Requested-With, Content-Type, Accept';
-axios.defaults.headers['Access-Control-Allow-Methods'] =
-  'POST, PUT, DELETE, GET, OPTIONS';
+axios.defaults.headers["Content-Type"] = "application/json";
+axios.defaults.headers["Access-Control-Allow-Origin"] = "*";
+axios.defaults.headers["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept";
+axios.defaults.headers["Access-Control-Allow-Methods"] = "POST, PUT, DELETE, GET, OPTIONS";
 
 export default axios;

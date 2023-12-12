@@ -10,20 +10,12 @@ const Footer = () => {
             <div className=' mb-md-0'>
               <ul className='d-flex flex-row gap-4 list-unstyled mb-0'>
                 <li>
-                  <a
-                    href='https://linkedin.com/in/dejan-ivkovski'
-                    className='text-white'
-                    target='_blank'
-                  >
+                  <a href='https://linkedin.com/in/dejan-ivkovski' className='text-white' target='_blank' rel='noreferrer'>
                     Linkedin
                   </a>
                 </li>
                 <li>
-                  <a
-                    href='https://github.com/DekoIvko'
-                    className='text-white'
-                    target='_blank'
-                  >
+                  <a href='https://github.com/DekoIvko' className='text-white' target='_blank' rel='noreferrer'>
                     GitHub
                   </a>
                 </li>
